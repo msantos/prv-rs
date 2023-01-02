@@ -55,14 +55,14 @@ fn event_loop(args: &Args) -> Result<(), Box<dyn std::error::Error>> {
             t0 = t1;
         }
 
-        if args.limit > 0 && count >= args.limit {
+        count += 1;
+
+        if args.limit > 0 && count > args.limit {
             if args.verbose {
                 eprint!("DISCARD:{}/{}:{}", count, args.limit, buf);
             }
             continue;
         }
-
-        count += 1;
 
         stdout.write_all(buf.as_bytes())?;
         stdout.flush()?;
