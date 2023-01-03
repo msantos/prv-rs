@@ -16,8 +16,8 @@ struct Args {
     window: u64,
 
     /// behaviour if write buffer is full
-    #[clap(short = 'W', long = "write-buffer", default_value = "block")]
-    write_buffer: String,
+    #[clap(short = 'W', long = "write-error", default_value = "block")]
+    write_error: String,
 
     /// verbose mode
     #[clap(short, long)]
@@ -27,10 +27,10 @@ struct Args {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
 
-    event_loop(&args)
+    run(&args)
 }
 
-fn event_loop(args: &Args) -> Result<(), Box<dyn std::error::Error>> {
+fn run(args: &Args) -> Result<(), Box<dyn std::error::Error>> {
     let mut stdout = io::stdout();
     let stdin = io::stdin();
 
